@@ -7,16 +7,29 @@ import ao.graph.user.NodeData;
 import ao.graph.user.EdgeWeight;
 
 /**
+ * A HexEdge is composed of two user given Nodes and the user given
+ *      EdgeWeight that connects them:
+ *  LO_NODE is the lesser (by label) of the two connected nodes
+ *  HI_NODE is the greater (by label) of the two connected nodes
+ *  weight is their connection
  *
-// * @param D
-// * @param W
+ * When comparing HexEdges there are two options:
+ *  (a) First compare by LO_NODE then by HI_NODE. This is called loHi order.
+ *  (b) First compare by HI_NODE then by LO_NODE. This is called hiLo order.
+ *
+ * Just like in a linked list, the MultiNode has a concept of a next and
+ *     previous MultiNode.
+ * The interesting thing is that there are two types of next and
+ *      previous: loHi and hiLo.
+ * The MultiNode chain as a whole is always sorted in BOTH of those orders.
+ *
  */
 public class HexEdge<D extends NodeData<D>, W extends EdgeWeight<W>>
 {
     //--------------------------------------------------------------------
     private FastNode<D, W> loEndpoint;
     private FastNode<D, W> hiEndpoint;
-    private W weight;
+    private W              weight;
 
     private HexEdge<D, W> hiLoPrev;
     private HexEdge<D, W> hiLoNext;
