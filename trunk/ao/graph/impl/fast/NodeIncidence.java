@@ -12,9 +12,18 @@ import ao.graph.user.NodeData;
  *  NodeIncidence are equal.
  * Nodes in a NodeIncidence are sorted in ascending
  *  minorEndpoint(LO_HI_ORDER).label() order.
- * 
-// * @param W
-// * @param D
+ *
+ * Two NodeIncidence are needed for each Node, loHi and hiLo.
+ * For example, given the edges:
+ * (d, f) (a, b) (a, c) (b, c) (b, d) (c, f) (a, f)
+ *  where (x, y) means an weight is connecting Node x to y.
+ *
+ * In loHi order, they are grouped as:
+ * [(a, b) (a, c) (a, f)] [(b, c) (b, d)] [(c, f)] [(d, f)]
+ *  Each group is a NodeIncidence.
+ *
+ * Same edges grouped in hiLo order:
+ * [(f, a) (f, c) (f, d)] [(d, b)] [(c, a) (c, b)] [(b, a)]
  */
 public class NodeIncidence
         <D extends NodeData<D>, W extends EdgeWeight<W>>
