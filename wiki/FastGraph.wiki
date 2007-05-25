@@ -1,8 +1,7 @@
-#summary My thesis project.  This page explains my graph algorithm.
+#summary Graph algorithm with fast node merging.
 
 = Introduction =
 
-My thesis project.
 An undirected, weighted graph data structure more efficient than adjacency maps is presented.  Merging of graph nodes is heavily optimized without sacrificing the performance of other operations.  Cluster analysis is shown to benefit significantly.
 
 = Details =
