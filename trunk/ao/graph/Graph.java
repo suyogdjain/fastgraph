@@ -149,7 +149,7 @@ public interface Graph<D extends NodeData<D>, W extends EdgeWeight<W>>
 
 
     /*
-     * Opperations that I do not needed for now:
+     * Opperations that I do not need for now:
      *
      * public W disjoin(D nodeDataA, D nodeDataB);
      * public Collection<D> incidentTo(D nodeData);
