@@ -7,7 +7,7 @@ import ao.graph.impl.common.SimpleAbsDomain;
 import ao.graph.impl.incidence.IncidenceListGraph;
 import ao.graph.struct.Endpoints;
 import ao.graph.struct.NodeDataPair;
-import ao.util.Rand;
+import ao.util.rand.Rand;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;

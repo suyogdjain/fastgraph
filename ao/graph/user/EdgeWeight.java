@@ -1,6 +1,8 @@
 package ao.graph.user;
 
 /**
+ * For our purpose, edges and edge weights are the same thing.
+ *
  * E connection between two Nodes.
 // * @param E
  */
@@ -8,7 +10,7 @@ public interface EdgeWeight<E extends EdgeWeight<E>>/* extends Comparable<E>*/
 {
     /**
      * When LinkedGraph.merge(NodeData n1, NodeData n2) is called and they are both connected
-     * to another data n3 then archs (n1, n3) and (n2, n3) are merged.
+     * to another data n3 then edges (n1, n3) and (n2, n3) are merged.
      * As a result of this method call neither of the merged Nodes should change.
      *
      * @param other the data to merge with
@@ -35,7 +37,7 @@ public interface EdgeWeight<E extends EdgeWeight<E>>/* extends Comparable<E>*/
          */
         public static EdgeWeight INSTANCE = new DUMMY();
 
-        // all DUMMY archs are the same, so no need for constructor.
+        // all DUMMY edge weights are the same, so no need for constructor.
         private DUMMY() {}
 
         public DUMMY mergeWith(DUMMY other)

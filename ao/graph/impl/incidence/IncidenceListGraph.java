@@ -31,14 +31,14 @@ public class IncidenceListGraph<D extends NodeData<D>, W extends EdgeWeight<W>>
 
     /**
      * @param edgeWeightDomain ...
-     * @param defaultNullArch ...
+     * @param defaultNullEdge ...
      */
     public IncidenceListGraph(
-            EdgeWeightDomain<W> edgeWeightDomain, W defaultNullArch)
+            EdgeWeightDomain<W> edgeWeightDomain, W defaultNullEdge)
     {
         GRAPH             = newGraphInstance();
         BY_EDGE_INDEX     = new EndpointIndex<D, W>(edgeWeightDomain);
-        DEFAULT_NULL_EDGE = defaultNullArch;
+        DEFAULT_NULL_EDGE = defaultNullEdge;
     }
 
 
