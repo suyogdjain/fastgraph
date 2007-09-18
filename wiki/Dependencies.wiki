@@ -1,0 +1,9 @@
+#summary Other projects that this project depends on.  A download with dependencies is available.
+
+= Introduction =
+My Utils Package
+http://code.google.com/p/alexoutilities/
+
+Javolution
+http://javolution.org/
+ 
