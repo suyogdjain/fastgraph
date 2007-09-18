@@ -9,5 +9,5 @@ import ao.graph.user.EdgeWeight;
 public interface GraphFactory<N extends NodeData<N>, A extends EdgeWeight<A>>
 {
     public Graph<N, A> newInstance();
-    public Graph<N, A> newInstance(A defaultNullArch);
+    public Graph<N, A> newInstance(A defaultNullEdge);
 }

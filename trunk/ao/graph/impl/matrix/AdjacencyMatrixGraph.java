@@ -33,17 +33,17 @@ public class AdjacencyMatrixGraph<D extends NodeData<D>, W extends EdgeWeight<W>
     //--------------------------------------------------------------------
     /**
      * @param edgeWeightDomain ...
-     * @param defaultNullArch ...
+     * @param defaultNullEdge ...
      */
     public AdjacencyMatrixGraph(
             EdgeWeightDomain<W> edgeWeightDomain,
-            W                   defaultNullArch)
+            W                   defaultNullEdge)
     {
         INDEX             = new FastMap<D, Integer>();
         REVERSE_INDEX     = new ArrayList<D>();
         MATRIX            = new ArrayList<EdgeWeight[]>();
         BY_EDGE_INDEX     = new EndpointIndex<D, W>(edgeWeightDomain);
-        DEFAULT_NULL_EDGE = defaultNullArch;
+        DEFAULT_NULL_EDGE = defaultNullEdge;
     }
 
 

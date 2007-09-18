@@ -1,10 +1,5 @@
 /*
- * Main.java
- *
  * Created on March 14, 2007, 12:23 PM
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
  */
 
 package ao.test;
