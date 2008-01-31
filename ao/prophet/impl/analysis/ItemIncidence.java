@@ -7,7 +7,8 @@ import ao.prophet.impl.relation.Relation;
 import javolution.util.FastMap;
 
 /**
- * Stores an item, its label, and those that are incident and greater than it.
+ * Stores an item, its label, and those items that are
+ *  incident and greater than it.
  */
 public class ItemIncidence<I> implements Comparable<ItemIncidence<I>>
 {

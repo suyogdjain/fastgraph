@@ -13,10 +13,13 @@ import java.util.Collection;
  * Simple first-in-first-out for users.
  *
  * Note that objects of this class are thread safe but not concurrent.
- * That means that there will never be any errors but changes done by two users
- *  or by the same user twice and the same time might not see each other.
- * This causes some of the numebrs like appraisalCount to be off sometimes.
- * To improve the situation appraisalCount is recalculated every time it is examined.
+ * That means that there will never be any errors but changes
+ *  done by two users or by the same user twice and the same time
+ *  might not see each other.
+ * This causes some of the numebrs like appraisalCount to be
+ *  off sometimes.
+ * To improve the situation appraisalCount is recalculated every time
+ *  it is examined.
  * Overall at best the data in a tally is close estimation.
  *
  */
@@ -33,7 +36,10 @@ public class AppraisalTally<U, I>
     private FinalPly.Lookup<I> currFinalPly;
 
 
-    public AppraisalTally(int maxUsers, int maxAppraisals, int maxAppraisalsPerUser)
+    public AppraisalTally(
+            int maxUsers,
+            int maxAppraisals,
+            int maxAppraisalsPerUser)
     {
         TALLY = new FastMap<U, AppraisalHistory<I>>(maxUsers);
         TALLY.setShared( true );
@@ -43,7 +49,7 @@ public class AppraisalTally<U, I>
         MAX_APPRAISALS_PER_USER = maxAppraisalsPerUser;
     }
 
-    //-------------------------------------------------------------------------------
+    //--------------------------------------------------------------------
     public int userCount()
     {
         return TALLY.size();
@@ -56,7 +62,7 @@ public class AppraisalTally<U, I>
     }
 
 
-    //-------------------------------------------------------------------------------
+    //--------------------------------------------------------------------
     public void tally(U user, I item, Appraisal appraisal)
     {
         AppraisalHistory<I> history;
@@ -66,7 +72,8 @@ public class AppraisalTally<U, I>
         {
             if (TALLY.size() >= (MAX_USERS - 1))
             {
-                FastMap.Entry<U, AppraisalHistory<I>> lruEntry = TALLY.head().getNext();
+                FastMap.Entry<U, AppraisalHistory<I>> lruEntry =
+                        TALLY.head().getNext();
 
                 TALLY.remove( lruEntry.getKey() );
                 appraisalCount -= lruEntry.getValue().size();
@@ -76,7 +83,8 @@ public class AppraisalTally<U, I>
             }
             else
             {
-                history = new AppraisalHistory<I>( MAX_APPRAISALS_PER_USER, currFinalPly );
+                history = new AppraisalHistory<I>(
+                                MAX_APPRAISALS_PER_USER, currFinalPly);
             }
         }
         else
@@ -88,7 +96,8 @@ public class AppraisalTally<U, I>
         {
             if (appraisalCount >= MAX_APPRAISALS)
             {
-                FastMap.Entry<U, AppraisalHistory<I>> lruEntry = TALLY.head().getNext();
+                FastMap.Entry<U, AppraisalHistory<I>> lruEntry =
+                        TALLY.head().getNext();
 
                 lruEntry.getValue().removeEarliest();
 
@@ -108,7 +117,7 @@ public class AppraisalTally<U, I>
     }
 
 
-    //-------------------------------------------------------------------------------
+    //--------------------------------------------------------------------
     public void removeUser(U user)
     {
         AppraisalHistory<I> history = TALLY.remove( user );
@@ -120,7 +129,7 @@ public class AppraisalTally<U, I>
     }
 
 
-    //-------------------------------------------------------------------------------
+    //--------------------------------------------------------------------
     public void removeItem(I item)
     {
         for (FastMap.Entry<U, AppraisalHistory<I>> e    = TALLY.tail(),
@@ -140,7 +149,7 @@ public class AppraisalTally<U, I>
     }
 
 
-    //-------------------------------------------------------------------------------
+    //--------------------------------------------------------------------
     public void examine(AppraisalHistory.Historian<I> historian)
     {
         int appraisalCountBefore = 0;
@@ -155,12 +164,14 @@ public class AppraisalTally<U, I>
             newAppraialCount += e.getValue().size();
         }
 
-        // estimates that newAppraisals captured half the intermidiate changes correctly.
-        appraisalCount = newAppraialCount + ((appraisalCount - appraisalCountBefore) >> 1);
+        // estimates that newAppraisals captured half the
+        //  intermidiate changes correctly.
+        appraisalCount = newAppraialCount +
+                         ((appraisalCount - appraisalCountBefore) >> 1);
     }
 
 
-    //-------------------------------------------------------------------------------
+    //--------------------------------------------------------------------
     public void updateClusters(FinalPly.Lookup<I> latestVersion)
     {
         ItemWeights.Translator<I> translator =
@@ -179,8 +190,9 @@ public class AppraisalTally<U, I>
     }
 
 
-    //-------------------------------------------------------------------------------
-    public Collection<I> mostLikely(U user, int howMany, ItemFilter<I> filter)
+    //--------------------------------------------------------------------
+    public Collection<I> mostLikely(
+            U user, int howMany, ItemFilter<I> filter)
     {
         AppraisalHistory<I> history = TALLY.get( user );
 

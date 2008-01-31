@@ -14,7 +14,8 @@ public class Relation implements EdgeWeight<Relation>
 //    public static
 //            <E extends EdgeWeight>
 //            EdgeWeightDomain<E>
-//                newDomain(int degree, Class<? extends EdgeWeight> edgeClass)
+//                newDomain(int degree,
+//                          Class<? extends EdgeWeight> edgeClass)
 //    {
 //        return new SimpleAbsDomain<E>(degree, 1.0f);
 //    }
@@ -26,6 +27,7 @@ public class Relation implements EdgeWeight<Relation>
     public static final Relation MIXED    = new Relation( 0, 0, 1 );
     public static final Relation NEUTRAL  = new Relation( 0, 0, 0 );
 
+
     //--------------------------------------------------------------------
     private static final float POSITIVE_WEIGHT =  1.0f;
     private static final float NEGATIVE_WEIGHT =  0.5f;
@@ -33,9 +35,9 @@ public class Relation implements EdgeWeight<Relation>
 
 
     //--------------------------------------------------------------------
-    private final int    positiveCount;
-    private final int    negativeCount;
-    private final int    mixedCount;
+    private final int   positiveCount;
+    private final int   negativeCount;
+    private final int   mixedCount;
     private final float weight;
 
 
@@ -66,7 +68,7 @@ public class Relation implements EdgeWeight<Relation>
     //--------------------------------------------------------------------
     // For our purposes any information is better than no information.
     // Some non-zero theshold could be used to return new unprecedented
-    //  clusters instead of ones known to have only a very week relation.
+    //  clusters instead of ones known to have only a very light relation.
     public boolean isLighterThanUnrelated()
     {
         return false;
