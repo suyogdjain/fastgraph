@@ -14,15 +14,20 @@ import java.util.*;
  */
 public class ItemWeights<I>
 {
+    //--------------------------------------------------------------------
     private final float WEIGHTS[];
     private final FinalPly.Lookup<I> FOR_PLY;
 
+
+    //--------------------------------------------------------------------
     public ItemWeights(int size, FinalPly.Lookup<I> forPly)
     {
         WEIGHTS = new float[size];
         FOR_PLY = forPly;
     }
 
+
+    //--------------------------------------------------------------------
     public void add(int label, float weight)
     {
         WEIGHTS[label] += weight;
@@ -37,11 +42,14 @@ public class ItemWeights<I>
     }
 
 
+    //--------------------------------------------------------------------
     public void clear()
     {
         Arrays.fill(WEIGHTS, 0.0f);
     }
 
+
+    //--------------------------------------------------------------------
     public Collection<I> heaviest(int howMany, ItemFilter<I> filter)
     {
         if (WEIGHTS.length == 0) return Collections.emptyList();
@@ -90,6 +98,7 @@ public class ItemWeights<I>
 
         return heaviest;
     }
+
 
     //--------------------------------------------------------------------
     public static class Translator<I>
@@ -165,7 +174,6 @@ public class ItemWeights<I>
     }
 
 
-
     //--------------------------------------------------------------------
     // Used like a private struct so public fields are ok.
     private static class WeightedItemLabel
@@ -197,6 +205,7 @@ public class ItemWeights<I>
 
         public boolean equals(Object obj)
         {
+            assert obj instanceof WeightedItemLabel;
             return label == ((WeightedItemLabel) obj).label;
         }
     }

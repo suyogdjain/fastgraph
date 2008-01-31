@@ -29,7 +29,8 @@ public class AppraisalHistory<I>
 
 
     @SuppressWarnings("unchecked")
-    public AppraisalHistory(int maxSize, FinalPly.Lookup<I> currFinalPly)
+    public AppraisalHistory(
+            int maxSize, FinalPly.Lookup<I> currFinalPly)
     {
         assert maxSize > 0;
 
@@ -40,7 +41,8 @@ public class AppraisalHistory<I>
         NEED_UP_PROPAGATION = new BitSet(maxSize);
 
         leafClusterLookup = currFinalPly;
-        weights = (currFinalPly == null ? null : currFinalPly.newWeights());
+        weights = (currFinalPly == null
+                   ? null : currFinalPly.newWeights());
     }
 
     public void clear()
@@ -72,12 +74,13 @@ public class AppraisalHistory<I>
             {
                 historian.study(
                         ITEMS[ indexA ], ITEMS[ indexB ],
-                        APPRAISALS[ indexA ].relationTo(APPRAISALS[ indexB ]));
+                        APPRAISALS[ indexA ]
+                                .relationTo(APPRAISALS[ indexB ]));
             }
         }
     }
 
-    //-----------------------------------------------------------
+    //--------------------------------------------------------------------
     public synchronized void add(I item, Appraisal appraisal)
     {
         int addAt = nextIndex;
@@ -93,7 +96,8 @@ public class AppraisalHistory<I>
 
         if (leafClusterLookup != null)
         {
-            LeafCluster<I> leafCluster = leafClusterLookup.leafClusterOf( item );
+            LeafCluster<I> leafCluster =
+                    leafClusterLookup.leafClusterOf( item );
 
             if (leafCluster != null)
             {
@@ -134,7 +138,9 @@ public class AppraisalHistory<I>
                     ITEMS     [ index ] = ITEMS[ firstAbsIndex ];
                     APPRAISALS[ index ] = APPRAISALS[ firstAbsIndex ];
 
-                    NEED_UP_PROPAGATION.set( index, NEED_UP_PROPAGATION.get(firstAbsIndex) );
+                    NEED_UP_PROPAGATION.set(
+                            index,
+                            NEED_UP_PROPAGATION.get(firstAbsIndex));
                 }
 
                 ITEMS     [ firstAbsIndex ] = null;
@@ -152,7 +158,7 @@ public class AppraisalHistory<I>
     }
 
 
-    //-----------------------------------------------------------
+    //--------------------------------------------------------------------
     public Collection<I> mostLikely(int howMany, ItemFilter<I> filter)
     {
         return (weights == null
@@ -161,13 +167,15 @@ public class AppraisalHistory<I>
     }
 
 
-    //-----------------------------------------------------------
+    //--------------------------------------------------------------------
     public synchronized void updateClusters(
-            FinalPly.Lookup<I> latestVersion, ItemWeights.Translator<I> translator)
+            FinalPly.Lookup<I> latestVersion,
+            ItemWeights.Translator<I> translator)
     {
         weights = (leafClusterLookup == null)
                     ? latestVersion.newWeights()
-                    : translator.translate(weights, PREV_GEN_APPRAISAL_DAMPER);
+                    : translator.translate(
+                        weights, PREV_GEN_APPRAISAL_DAMPER);
 
         leafClusterLookup = latestVersion;
         
@@ -180,11 +188,13 @@ public class AppraisalHistory<I>
                  i >= 0;
                  i = NEED_UP_PROPAGATION.nextSetBit(i + 1))
         {
-            LeafCluster<I> leafCluster = leafClusterLookup.leafClusterOf( ITEMS[i] );
+            LeafCluster<I> leafCluster =
+                    leafClusterLookup.leafClusterOf( ITEMS[i] );
 
             if (leafCluster != null)
             {
-                leafCluster.upPropagate( weights, APPRAISALS[ i ].value() );
+                leafCluster.upPropagate(
+                        weights, APPRAISALS[ i ].value());
             }
         }
 
@@ -192,18 +202,19 @@ public class AppraisalHistory<I>
     }
 
 
-    //-----------------------------------------------------------
+    //--------------------------------------------------------------------
     public int size()
     {
         return size;
     }
 
 
-    //-----------------------------------------------------------
+    //--------------------------------------------------------------------
     private int absIndexOf(int index)
     {
         assert index < size;
-        return ((nextIndex - (size - index)) + ITEMS.length) % ITEMS.length;
+        return ((nextIndex - (size - index)) + ITEMS.length)
+                    % ITEMS.length;
     }
 
     private int incIndex( int indexToIncrement )
@@ -212,7 +223,7 @@ public class AppraisalHistory<I>
     }
 
 
-    //-----------------------------------------------------------
+    //--------------------------------------------------------------------
     public static interface Historian<I>
     {
 //        void study(
