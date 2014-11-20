@@ -4,7 +4,7 @@ import ao.prophet.impl.cluster.Cluster;
 import ao.prophet.impl.cluster.InternalCluster;
 import ao.prophet.impl.cluster.LeafCluster;
 import ao.prophet.impl.cluster.FinalPly;
-import ao.util.rand.Rand;
+import ao.util.math.rand.Rand;
 
 import java.awt.*;
 import java.awt.image.VolatileImage;
